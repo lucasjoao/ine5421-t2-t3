@@ -1,3 +1,4 @@
-import dotenv
+# TODO: check this
+# import dotenv
 
-dotenv.load_dotenv('./data/mvp/.env')
+# dotenv.load_dotenv('./data/mvp/.env')
