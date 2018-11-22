@@ -4,7 +4,7 @@
 
 
 all:
-	@python mvp.py
+	@python runner.py
 
 
 clean:
