@@ -12,6 +12,8 @@ class TokenType(enum.Enum):
     LEFT_CURLY = '{'
     RIGHT_CURLY = '}'
     ASSIGNMENT = '='
+    LEFT_SQUARE = '['
+    RIGHT_SQUARE = ']'
 
     EOF = 256
     IF = 257
@@ -26,6 +28,7 @@ class TokenType(enum.Enum):
     NUM = 266
     REAL = 267
     RELOP = 268
+    BASIC = 269
 
 
 class Token(object):
@@ -125,4 +128,6 @@ RESERVED_WORDS = {
     'break': TokenType.BREAK,
     'true': TokenType.TRUE,
     'false': TokenType.FALSE,
+    'int': TokenType.BASIC,
+    'float': TokenType.BASIC
 }
