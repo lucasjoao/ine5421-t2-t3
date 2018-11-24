@@ -59,7 +59,7 @@ class Lexer(object):
         if lookahead in '=<>!':
             self._retract()
             return self._next_relop()
-        return Token(TokenType(lookahead))
+        return Token(TokenType(lookahead), lookahead)
 
     def _next_num_or_real(self):
         lexeme = self._read_digits()
@@ -89,7 +89,7 @@ class Lexer(object):
             lookahead = self._next_char()
         self._retract()
         if lexeme in RESERVED_WORDS:
-            return Token(RESERVED_WORDS[lexeme])
+            return Token(RESERVED_WORDS[lexeme], lexeme)
         return Token(TokenType.ID, lexeme)
 
     def _next_relop(self):
@@ -100,7 +100,7 @@ class Lexer(object):
             return Token(TokenType.RELOP, lexeme)
         self._retract()
         if lexeme == '=':
-            return Token(TokenType.ASSIGNMENT)
+            return Token(TokenType.ASSIGNMENT, lexeme)
         return Token(TokenType.RELOP, lexeme)
 
     def _next_char(self):

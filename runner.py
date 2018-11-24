@@ -9,10 +9,10 @@ tokens = [lex.next_token() for i in range(6)]
 print('Lexema ' + tokens[0].lexeme + ' é do tipo ID?')
 print(tokens[0].type == lexer.TokenType.ID)
 
-print('Lexema ' + 'while' + ' é do tipo WHILE?')  # FIXME: check this problem
+print('Lexema ' + tokens[1].lexeme + ' é do tipo WHILE?')
 print(tokens[1].type == lexer.TokenType.WHILE)
 
-print('Lexema ' + ';' + ' é do tipo SEMICOLON?')  # FIXME: check this problem
+print('Lexema ' + tokens[2].lexeme + ' é do tipo SEMICOLON?')
 print(tokens[2].type == lexer.TokenType.SEMICOLON)
 
 print('Lexema ' + tokens[3].lexeme + ' é do tipo NUM?')
@@ -21,7 +21,7 @@ print(tokens[3].type == lexer.TokenType.NUM)
 print('Lexema ' + tokens[4].lexeme + ' é do tipo REAL?')
 print(tokens[4].type == lexer.TokenType.REAL)
 
-print('Lexema ' + 'if' + ' é do tipo IF?')  # FIXME: check this problem
+print('Lexema ' + tokens[5].lexeme + ' é do tipo IF?')
 print(tokens[5].type == lexer.TokenType.IF)
 
 try:
