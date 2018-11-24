@@ -32,10 +32,18 @@ except:
 print('Chegou no fim do arquivo?')
 print(lex.next_token().type == lexer.TokenType.EOF)
 
+# source.c cannot has an error at first position
 print('Testando source.c')
 lex = lexer.Lexer('data/source.c')
 t = lex.next_token()
+
 while t.type != lexer.TokenType.EOF:
     print(t.type.name)
     t = lex.next_token()
-print('Leitura bem sucedida!')
+
+    # discard and get next one if token is invalid
+    while True:
+        if t is not None:
+            break
+        t = lex.next_token()
+print('Leitura finalizada!')

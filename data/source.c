@@ -1,7 +1,7 @@
 {
     int i;
     int j;
-    float[100] a;
+    float[100] a; $
     float v;
     float x;
     while (true) {
@@ -16,5 +16,5 @@
         x = a[i];
         a[i] = a[j];
         a[j] = x;
-    }
+    $}
 }

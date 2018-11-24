@@ -44,6 +44,8 @@ class Lexer(object):
         self._source = open(filename, 'r')
         self._eof = self._source.seek(0, 2)
         self._source.seek(0)
+        self._ln_number = 1
+        self._col_number = 0
 
     def next_token(self):
         self._skip_space()
@@ -59,7 +61,12 @@ class Lexer(object):
         if lookahead in '=<>!':
             self._retract()
             return self._next_relop()
-        return Token(TokenType(lookahead), lookahead)
+        try:
+            return Token(TokenType(lookahead), lookahead)
+        except ValueError:
+            print('Caracter ' + lookahead + ' inválido na ' +
+                  'linha ' + str(self._ln_number) + ' ' +
+                  'e coluna ' + str(self._col_number))
 
     def _next_num_or_real(self):
         lexeme = self._read_digits()
@@ -104,17 +111,22 @@ class Lexer(object):
         return Token(TokenType.RELOP, lexeme)
 
     def _next_char(self):
+        self._col_number += 1
         return self._source.read(1)
 
     def _retract(self):
+        self._col_number -= 1
         current_pos = self._source.tell()
         if current_pos != self._eof:
             self._source.seek(current_pos - 1)
 
     def _skip_space(self):
-        ch = self._source.read(1)
+        ch = self._next_char()
         while ch.isspace():
-            ch = self._source.read(1)
+            if ch == '\n':
+                self._col_number = 0
+                self._ln_number += 1
+            ch = self._next_char()
         if ch:
             self._retract()
 
