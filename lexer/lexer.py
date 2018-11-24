@@ -109,7 +109,7 @@ class Lexer(object):
     def _retract(self):
         current_pos = self._source.tell()
         if current_pos != self._eof:
-            return self._source.seek(current_pos - 1)
+            self._source.seek(current_pos - 1)
 
     def _skip_space(self):
         ch = self._source.read(1)
