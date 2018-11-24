@@ -99,7 +99,7 @@ class Lexer(object):
             lexeme += lookahead
             return Token(TokenType.RELOP, lexeme)
         self._retract()
-        if lexeme = '=':
+        if lexeme == '=':
             return Token(TokenType.ASSIGNMENT)
         return Token(TokenType.RELOP, lexeme)
 
