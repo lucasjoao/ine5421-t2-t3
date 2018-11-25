@@ -1,4 +1,4 @@
-from lexer import lexer
+from src import lexer
 
 filename = 'data/tokens'
 
