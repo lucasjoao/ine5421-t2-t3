@@ -1,4 +1,5 @@
 import json
+from .lexer import TokenType
 
 
 class Grammar:
@@ -11,8 +12,9 @@ class Grammar:
         """
         self._initial_symbol = initial_symbol
         self._productions = set(productions)
-        self._nonterminals = self._get_nonterminals()
-        self._terminals = self._get_terminals()
+        self._nonterminals = {self._initial_symbol}
+        self._terminals = set()
+        self._get_nonterminals_and_terminals()
 
     def save_json(self, filename):
         data = {
@@ -24,22 +26,18 @@ class Grammar:
         with open(filename + '.json', 'w') as write_file:
             json.dump(data, write_file, indent=4)
 
-    def _get_nonterminals(self):
-        nonterminals = set(self._initial_symbol)
+    def _get_nonterminals_and_terminals(self):
         for production in self._productions:
-            nonterminals.add(production[0])
-            # FIXME: maybe use save_json to get nonterminals
-            if len(production) == 3:
-                nonterminals.add(production[2])
-        return nonterminals
-
-    def _get_terminals(self):
-        terminals = set()
-        for production in self._productions:
-            # FIXME: maybe use save_json to get terminals
-            # if production[1] != Utils.EPSILON:
-            terminals.add(production[1])
-        return terminals
+            for symbol in production:
+                # TODO: use utils
+                if symbol != '&':
+                    # terminals don't have _ in work's glc
+                    if not symbol.isalpha() and '_' not in symbol:
+                        self._terminals.add(symbol)
+                    elif symbol.upper() in TokenType.__members__:
+                        self._terminals.add(symbol)
+                    else:
+                        self._nonterminals.add(symbol)
 
     @staticmethod
     def read_from_json(filename):

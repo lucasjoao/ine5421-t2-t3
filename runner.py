@@ -1,4 +1,4 @@
-from src import lexer
+from src import lexer, grammar
 
 filename = 'data/tokens'
 
@@ -47,3 +47,14 @@ while t.type != lexer.TokenType.EOF:
             break
         t = lex.next_token()
 print('Leitura finalizada!')
+
+print('GLC em memória')
+glc = grammar.Grammar.read_from_json('data/glc')
+print('não-terminais:')
+print(len(glc._nonterminals))
+print(glc._nonterminals)
+print('terminais:')
+print(len(glc._terminals))
+print(glc._terminals)
+print('Fim da verificação da GLC em memória')
+
