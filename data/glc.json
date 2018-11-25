@@ -1,93 +1,291 @@
 {
-    "nonterminals": [
-        "Q2",
-        "Q5",
-        "Q4",
-        "Q0",
-        "Q1",
-        "Q3"
-    ],
-    "terminals": [
-        "a",
-        "b"
-    ],
     "productions": [
         [
-            "Q2",
-            "b",
-            "Q3"
+            "program",
+            "block"
         ],
         [
-            "Q3",
-            "b",
-            "Q5"
+            "block",
+            "{",
+            "decls",
+            "stmts",
+            "}"
         ],
         [
-            "Q5",
-            "a",
-            "Q5"
+            "decls",
+            "decl",
+            "decls"
         ],
         [
-            "Q0",
-            "b",
-            "Q1"
+            "decls",
+            "&"
         ],
         [
-            "Q3",
-            "a",
-            "Q0"
+            "decl",
+            "type",
+            "id",
+            ";"
         ],
         [
-            "Q1",
-            "b",
-            "Q3"
+            "type",
+            "basic",
+            "types"
         ],
         [
-            "Q2",
-            "a"
+            "types",
+            "[",
+            "num",
+            "]",
+            "types"
         ],
         [
-            "Q1",
-            "a",
-            "Q2"
+            "types",
+            "&"
         ],
         [
-            "Q2",
-            "a",
-            "Q4"
+            "stmts",
+            "stmt",
+            "stmts"
         ],
         [
-            "Q4",
-            "b",
-            "Q2"
+            "stmts",
+            "&"
         ],
         [
-            "Q5",
-            "b",
-            "Q5"
+            "stmt",
+            "loc",
+            "=",
+            "bool",
+            ";"
         ],
         [
-            "Q0",
-            "a",
-            "Q0"
+            "stmt",
+            "matched_if"
         ],
         [
-            "Q4",
-            "a",
-            "Q4"
+            "stmt",
+            "open_if"
         ],
         [
-            "Q3",
-            "a"
+            "stmt",
+            "while",
+            "(",
+            "bool",
+            ")",
+            "stmt"
         ],
         [
-            "Q0",
-            "a"
+            "stmt",
+            "do",
+            "stmt",
+            "while",
+            "(",
+            "bool",
+            ")",
+            ";"
         ],
         [
-            "Q4",
-            "a"
+            "stmt",
+            "break",
+            ";"
+        ],
+        [
+            "stmt",
+            "block"
+        ],
+        [
+            "matched_if",
+            "if",
+            "(",
+            "bool",
+            ")",
+            "then",
+            "matched_if",
+            "else",
+            "matched_if"
+        ],
+        [
+            "open_if",
+            "if",
+            "(",
+            "bool",
+            ")",
+            "then",
+            "stmt"
+        ],
+        [
+            "open_if",
+            "if",
+            "(",
+            "bool",
+            ")",
+            "then",
+            "matched_if",
+            "else",
+            "open_if"
+        ],
+        [
+            "loc",
+            "id",
+            "locs"
+        ],
+        [
+            "locs",
+            "[",
+            "bool",
+            "]",
+            "locs"
+        ],
+        [
+            "locs",
+            "&"
+        ],
+        [
+            "bool",
+            "join"
+        ],
+        [
+            "bool",
+            "join",
+            "||",
+            "bool"
+        ],
+        [
+            "join",
+            "equality"
+        ],
+        [
+            "join",
+            "equality",
+            "&&",
+            "join"
+        ],
+        [
+            "equality",
+            "rel"
+        ],
+        [
+            "equality",
+            "rel",
+            "==",
+            "equality"
+        ],
+        [
+            "equality",
+            "rel",
+            "!=",
+            "equality"
+        ],
+        [
+            "rel",
+            "expr",
+            "<",
+            "expr"
+        ],
+        [
+            "rel",
+            "expr",
+            "<=",
+            "expr"
+        ],
+        [
+            "rel",
+            "expr",
+            ">=",
+            "expr"
+        ],
+        [
+            "rel",
+            "expr",
+            ">",
+            "expr"
+        ],
+        [
+            "rel",
+            "expr"
+        ],
+        [
+            "expr",
+            "term",
+            "exprs"
+        ],
+        [
+            "exprs",
+            "+",
+            "term",
+            "exprs"
+        ],
+        [
+            "exprs",
+            "-",
+            "term",
+            "exprs"
+        ],
+        [
+            "exprs",
+            "&"
+        ],
+        [
+            "term",
+            "unary",
+            "terms"
+        ],
+        [
+            "terms",
+            "*",
+            "unary",
+            "terms"
+        ],
+        [
+            "terms",
+            "/",
+            "unary",
+            "terms"
+        ],
+        [
+            "terms",
+            "&"
+        ],
+        [
+            "unary",
+            "!",
+            "unary"
+        ],
+        [
+            "unary",
+            "-",
+            "unary"
+        ],
+        [
+            "unary",
+            "factor"
+        ],
+        [
+            "factor",
+            "(",
+            "bool",
+            ")"
+        ],
+        [
+            "factor",
+            "loc"
+        ],
+        [
+            "factor",
+            "num"
+        ],
+        [
+            "factor",
+            "real"
+        ],
+        [
+            "factor",
+            "true"
+        ],
+        [
+            "factor",
+            "false"
         ]
     ],
-    "initial_symbol": "Q0"
+    "initial_symbol": "program"
 }
