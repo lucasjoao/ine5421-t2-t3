@@ -1,5 +1,6 @@
 import json
 from .lexer import TokenType
+from .utils import Utils
 
 
 class Grammar:
@@ -29,8 +30,7 @@ class Grammar:
     def _get_nonterminals_and_terminals(self):
         for production in self._productions:
             for symbol in production:
-                # TODO: use utils
-                if symbol != '&':
+                if symbol != Utils.EPSILON:
                     # terminals don't have _ in work's glc
                     if not symbol.isalpha() and '_' not in symbol:
                         self._terminals.add(symbol)
