@@ -9,6 +9,8 @@ class Parser:
         self.glc = Grammar.read_from_json(filename, test_env)
         # make self.first_sets where the key is a NT and the value a set
         self._make_dict_first_sets()
+        # make self.follow_sets where the key is a NT and the value a set
+        self._make_dict_follow_sets()
 
     def _make_dict_first_sets(self):
         self.first_sets = {key: set() for key in self.glc._nonterminals}
@@ -48,3 +50,28 @@ class Parser:
                     self._make_first_set(production, key, can_add_epsilon)
 
             self.first_sets[key] = self.first_sets[key].union(other_first_set)
+
+    def _make_dict_follow_sets(self):
+        self.follow_sets = {key: set() for key in self.glc._nonterminals}
+
+        self.follow_sets[self.glc._initial_symbol].add(Utils.END_MARK)
+
+        while True:
+            bckp_follow_sets = copy.deepcopy(self.follow_sets)
+            glc_productions = copy.deepcopy(self.glc._productions)
+
+            for key in self.glc._nonterminals:
+                for production in glc_productions:
+                    origin_prod = production.pop(0)
+
+                    for symbol in production:
+                        production.remove(symbol)
+
+                        if key == symbol:
+                            self._make_follow_set(production)
+
+            if bckp_follow_sets == self.follow_sets:
+                break
+
+    def _make_follow_set(self, production):
+        pass

@@ -16,6 +16,7 @@ class Utils:
     """Helper to try apply DRY across the project"""
 
     EPSILON = '&'
+    END_MARK = '$'
 
     def __init__(self):
         pass
