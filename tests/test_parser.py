@@ -20,6 +20,22 @@ class ParserTests(unittest.TestCase):
                         'C': {'c', '&'}}
         self.assertDictEqual(parser.first_sets, right_result)
 
+    def test_make_follow_set_01(self):
+        # example from slide
+        parser = Parser('data/test_make_first_set_01', True)
+        right_result = {'S': {'$'},
+                        'B': {'c'},
+                        'A': {'b', 'a', 'd', 'c'}}
+        self.assertDictEqual(parser.follow_sets, right_result)
+
+    def test_make_follow_set_02(self):
+        # example from slide
+        parser = Parser('data/test_make_first_set_02', True)
+        right_result = {'S': {'$'},
+                        'B': {'c', '$'},
+                        'A': {'b', 'a', 'c', 'd'},
+                        'C': {'d', '$'}}
+        self.assertDictEqual(parser.follow_sets, right_result)
 
 if __name__ == '__main__':
     unittest.main()

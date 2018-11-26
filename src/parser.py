@@ -32,7 +32,7 @@ class Parser:
                 break
 
     def _make_first_set(self, production, key, can_add_epsilon):
-        symbol = copy.deepcopy(production)[0]
+        symbol = production[0]
         if symbol in self.glc._terminals:
             self.first_sets[key].add(symbol)
         elif symbol in self.glc._nonterminals:
@@ -58,20 +58,37 @@ class Parser:
 
         while True:
             bckp_follow_sets = copy.deepcopy(self.follow_sets)
-            glc_productions = copy.deepcopy(self.glc._productions)
 
             for key in self.glc._nonterminals:
-                for production in glc_productions:
-                    origin_prod = production.pop(0)
+                glc_productions = copy.deepcopy(self.glc._productions)
 
-                    for symbol in production:
+                for production in glc_productions:
+                    origin_prod = production[0]
+
+                    for symbol in production[1:]:
                         production.remove(symbol)
 
                         if key == symbol:
-                            self._make_follow_set(production)
+                            self._make_follow_set(production[1:], key,
+                                                  origin_prod)
 
             if bckp_follow_sets == self.follow_sets:
                 break
 
-    def _make_follow_set(self, production):
-        pass
+    def _make_follow_set(self, production, key, origin_prod):
+        if not production:
+            self.follow_sets[key] = self.follow_sets[key].union(
+                                    self.follow_sets[origin_prod])
+        else:
+            symbol = production[0]
+            if symbol in self.glc._nonterminals:
+                first_set = copy.deepcopy(self.first_sets[symbol])
+
+                if Utils.EPSILON in first_set:
+                    first_set.remove(Utils.EPSILON)
+                    production.remove(symbol)
+                    self._make_follow_set(production, key, origin_prod)
+
+                self.follow_sets[key] = self.follow_sets[key].union(first_set)
+            elif symbol in self.glc._terminals:
+                self.follow_sets[key].add(symbol)
