@@ -5,7 +5,7 @@ from src.parser import Parser
 class ParserTests(unittest.TestCase):
     def test_make_first_set_01(self):
         # example from slide
-        parser = Parser('data/test_make_first_set_01', True)
+        parser = Parser('data/book_glc_01', True)
         right_result = {'S': {'a', 'b', 'c', 'd'},
                         'B': {'a', 'b', 'd', '&'},
                         'A': {'a', '&'}}
@@ -13,7 +13,7 @@ class ParserTests(unittest.TestCase):
 
     def test_make_first_set_02(self):
         # example from slide
-        parser = Parser('data/test_make_first_set_02', True)
+        parser = Parser('data/book_glc_02', True)
         right_result = {'S': {'a', 'b', 'c', 'd'},
                         'B': {'a', 'b', 'c', 'd'},
                         'A': {'a', '&'},
@@ -22,7 +22,7 @@ class ParserTests(unittest.TestCase):
 
     def test_make_follow_set_01(self):
         # example from slide
-        parser = Parser('data/test_make_first_set_01', True)
+        parser = Parser('data/book_glc_01', True)
         right_result = {'S': {'$'},
                         'B': {'c'},
                         'A': {'b', 'a', 'd', 'c'}}
@@ -30,7 +30,7 @@ class ParserTests(unittest.TestCase):
 
     def test_make_follow_set_02(self):
         # example from slide
-        parser = Parser('data/test_make_first_set_02', True)
+        parser = Parser('data/book_glc_02', True)
         right_result = {'S': {'$'},
                         'B': {'c', '$'},
                         'A': {'b', 'a', 'c', 'd'},
