@@ -49,7 +49,7 @@ while t.type != lexer.TokenType.EOF:
 print('Leitura finalizada!')
 
 print('GLC em memória')
-glc = grammar.Grammar.read_from_json('data/glc')
+glc = grammar.Grammar.read_from_json('data/glc', False)
 print('não-terminais:')
 print(len(glc._nonterminals))
 print(glc._nonterminals)

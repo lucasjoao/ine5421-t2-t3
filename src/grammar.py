@@ -5,17 +5,22 @@ from .utils import Utils
 
 class Grammar:
 
-    def __init__(self, productions, initial_symbol):
+    def __init__(self, productions, initial_symbol, test_env,
+                 terminals=None, nonterminals=None):
         """Constructs a grammar from a list of productions and the initial symbol.
 
         Assumes each production "A -> aB", where B is optional, is of the form:
             ("A", "a"[, "B"])
         """
         self._initial_symbol = initial_symbol
-        self._productions = set(productions)
-        self._nonterminals = {self._initial_symbol}
-        self._terminals = set()
-        self._get_nonterminals_and_terminals()
+        self._productions = productions
+        if test_env:
+            self._terminals = terminals
+            self._nonterminals = nonterminals
+        else:
+            self._nonterminals = {self._initial_symbol}
+            self._terminals = set()
+            self._make_nonterminals_and_terminals()
 
     def save_json(self, filename):
         data = {
@@ -27,7 +32,7 @@ class Grammar:
         with open(filename + '.json', 'w') as write_file:
             json.dump(data, write_file, indent=4)
 
-    def _get_nonterminals_and_terminals(self):
+    def _make_nonterminals_and_terminals(self):
         for production in self._productions:
             for symbol in production:
                 if symbol != Utils.EPSILON:
@@ -40,9 +45,15 @@ class Grammar:
                         self._nonterminals.add(symbol)
 
     @staticmethod
-    def read_from_json(filename):
+    def read_from_json(filename, test_env):
         with open(filename + '.json', 'r') as read_file:
             data = json.load(read_file)
-        productions = [tuple(production) for production in data['productions']]
+        productions = [list(production) for production in data['productions']]
         initial_symbol = data['initial_symbol']
-        return Grammar(productions, initial_symbol)
+        if test_env:
+            terminals = data['terminals']
+            nonterminals = data['nonterminals']
+            return Grammar(productions, initial_symbol, test_env,
+                           terminals, nonterminals)
+        else:
+            return Grammar(productions, initial_symbol, test_env)
