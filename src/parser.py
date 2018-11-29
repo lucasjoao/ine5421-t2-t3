@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+"""INE 5421 - Linguagem Formais e Compiladores - Trabalho 01
+
+Universidade Federal de Santa Catarina
+
+Departamento de Informática e Estatística (INE)
+
+Alunos:
+
+- Filipe Oliveira de Borba
+- Lucas João Martins
+"""
+
 import copy
 from .grammar import Grammar
 from .utils import Utils
@@ -11,7 +24,8 @@ class Parser:
         self._make_dict_first_sets()
         # make self.follow_sets where the key is a NT and the value a set
         self._make_dict_follow_sets()
-        # parsing table where the key is a tuple of (NT, T) and the value is the value in table
+        # parsing table where the key is a tuple of (NT, T) and the value is
+        # the value in table
         self._make_parsing_table()
 
     def _make_dict_first_sets(self):
