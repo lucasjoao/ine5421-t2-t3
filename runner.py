@@ -1,4 +1,4 @@
-from src import lexer, grammar
+from src import lexer, grammar, front_end
 
 filename = 'data/tokens'
 
@@ -58,3 +58,5 @@ print(len(glc._terminals))
 print(glc._terminals)
 print('Fim da verificação da GLC em memória')
 
+front = front_end.FrontEnd('data/source.c', 'data/glc')
+front.compile()
