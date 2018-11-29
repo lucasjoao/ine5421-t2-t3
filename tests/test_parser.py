@@ -71,6 +71,11 @@ class ParserTests(unittest.TestCase):
                         ('F', '('): ['(', 'E', ')']}
         self.assertDictEqual(parser.parsing_table, right_result)
 
+    def test_parse(self):
+        # example from slide
+        parser = Parser('data/book_glc_03', True)
+        self.assertTrue(parser.parse(['id', 'v', 'id', 'til', 'id']))
+        self.assertFalse(parser.parse(['id', 'neg']))
 
 if __name__ == '__main__':
     unittest.main()

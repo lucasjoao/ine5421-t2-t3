@@ -116,3 +116,35 @@ class Parser:
 
     def _add_in_parsing_table(self, production, symbol):
         self.parsing_table[production[0], symbol] = production[1:]
+
+    def parse(self, user_input):
+        user_input += Utils.END_MARK
+
+        stack = [Utils.END_MARK, self.glc._initial_symbol]
+        buffer_index = 0
+
+        while True:
+            print(stack)
+
+            stack_top = stack[len(stack) - 1]
+            char_input = user_input[buffer_index]
+
+            stack.pop()
+
+            if stack_top == char_input:
+                if stack_top == Utils.END_MARK:
+                    return True
+
+                buffer_index += 1
+            else:
+                key = (stack_top, char_input)
+
+                try:
+                    value = self.parsing_table[key]
+                except KeyError:
+                    print('O par ' + str(key) + ' gera erro na parsing table.')
+                    return False
+
+                if Utils.EPSILON not in value:
+                    for symbol in value[::-1]:
+                        stack.append(symbol)
