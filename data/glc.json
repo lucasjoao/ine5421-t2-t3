@@ -60,10 +60,6 @@
         ],
         [
             "stmt",
-            "matched_if"
-        ],
-        [
-            "stmt",
             "open_if"
         ],
         [
@@ -94,35 +90,15 @@
             "block"
         ],
         [
-            "matched_if",
-            "if",
-            "(",
-            "bool",
-            ")",
-            "then",
-            "matched_if",
-            "else",
-            "matched_if"
-        ],
-        [
             "open_if",
             "if",
             "(",
             "bool",
             ")",
             "then",
+            "stmt",
+            "else",
             "stmt"
-        ],
-        [
-            "open_if",
-            "if",
-            "(",
-            "bool",
-            ")",
-            "then",
-            "matched_if",
-            "else",
-            "open_if"
         ],
         [
             "loc",
@@ -142,67 +118,79 @@
         ],
         [
             "bool",
-            "join"
+            "join",
+            "boolx"
         ],
         [
-            "bool",
-            "join",
+            "boolx",
             "||",
             "bool"
         ],
         [
-            "join",
-            "equality"
+            "boolx",
+            "&"
         ],
         [
             "join",
             "equality",
+            "joinx"
+        ],
+        [
+            "joinx",
             "&&",
             "join"
         ],
         [
-            "equality",
-            "rel"
+            "joinx",
+            "&"
         ],
         [
             "equality",
             "rel",
+            "equalityx"
+        ],
+        [
+            "equalityx",
+            "&"
+        ],
+        [
+            "equality",
             "==",
             "equality"
         ],
         [
             "equality",
-            "rel",
             "!=",
             "equality"
         ],
         [
             "rel",
             "expr",
+            "relx"
+        ],
+        [
+            "relx",
             "<",
             "expr"
         ],
         [
-            "rel",
-            "expr",
+            "relx",
             "<=",
             "expr"
         ],
         [
-            "rel",
-            "expr",
+            "relx",
             ">=",
             "expr"
         ],
         [
-            "rel",
-            "expr",
+            "relx",
             ">",
             "expr"
         ],
         [
-            "rel",
-            "expr"
+            "relx",
+            "&"
         ],
         [
             "expr",
