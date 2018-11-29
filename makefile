@@ -6,6 +6,21 @@
 all:
 	@python runner.py
 
+t2:
+	@python runner.py t2
+
+dump:
+	@python runner.py dump
+
+t3:
+	@python runner.py
+
+test:
+	@python -m unittest discover -b
+
+test_verbose:
+	@python -m unittest discover
+
 
 clean:
 	@rm -rf __pycache__
