@@ -34,7 +34,7 @@ class FrontEnd:
                 token = self.lexer.next_token()
 
             value = token.type.value
-            if token.type in [TokenType.RELOP, TokenType.EOF]:
+            if token.type == TokenType.EOF:
                 value = token.lexeme
 
             tokens.append(value)
