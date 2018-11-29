@@ -11,6 +11,8 @@ class Parser:
         self._make_dict_first_sets()
         # make self.follow_sets where the key is a NT and the value a set
         self._make_dict_follow_sets()
+        # parsing table where the key is a tuple of (NT, T) and the value is the value in table
+        self._make_parsing_table()
 
     def _make_dict_first_sets(self):
         self.first_sets = {key: set() for key in self.glc._nonterminals}
@@ -92,3 +94,25 @@ class Parser:
                 self.follow_sets[key] = self.follow_sets[key].union(first_set)
             elif symbol in self.glc._terminals:
                 self.follow_sets[key].add(symbol)
+
+    def _make_parsing_table(self):
+        self.parsing_table = {}
+
+        for production in self.glc._productions:
+            first = production[1]
+            first_set = set()
+
+            if first in self.glc._terminals or first == Utils.EPSILON:
+                first_set.add(first)
+            else:
+                first_set = self.first_sets[first]
+
+            if Utils.EPSILON in first_set:
+                for symbol in self.follow_sets[production[0]]:
+                    self._add_in_parsing_table(production, symbol)
+            else:
+                for symbol in first_set:
+                    self._add_in_parsing_table(production, symbol)
+
+    def _add_in_parsing_table(self, production, symbol):
+        self.parsing_table[production[0], symbol] = production[1:]
