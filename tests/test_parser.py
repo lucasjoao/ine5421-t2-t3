@@ -53,5 +53,24 @@ class ParserTests(unittest.TestCase):
                         ('F', 'neg'): ['neg', 'F']}
         self.assertDictEqual(parser.parsing_table, right_result)
 
+    def test_make_parsing_table_02(self):
+        # example from aho
+        parser = Parser('data/book_glc_04', True)
+        right_result = {('E', 'id'): ['T', 'Z'],
+                        ('E', '('): ['T', 'Z'],
+                        ('Z', 'p'): ['p', 'T', 'Z'],
+                        ('Z', ')'): ['&'],
+                        ('Z', '$'): ['&'],
+                        ('T', 'id'): ['F', 'W'],
+                        ('T', '('): ['F', 'W'],
+                        ('W', 'p'): ['&'],
+                        ('W', 'x'): ['x', 'F', 'W'],
+                        ('W', ')'): ['&'],
+                        ('W', '$'): ['&'],
+                        ('F', 'id'): ['id'],
+                        ('F', '('): ['(', 'E', ')']}
+        self.assertDictEqual(parser.parsing_table, right_result)
+
+
 if __name__ == '__main__':
     unittest.main()
