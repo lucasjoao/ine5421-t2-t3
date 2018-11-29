@@ -1,5 +1,6 @@
 import unittest
 from src.parser import Parser
+from src.front_end import FrontEnd
 
 
 class ParserTests(unittest.TestCase):
@@ -76,6 +77,11 @@ class ParserTests(unittest.TestCase):
         parser = Parser('data/book_glc_03', True)
         self.assertTrue(parser.parse(['id', 'v', 'id', 'til', 'id']))
         self.assertFalse(parser.parse(['id', 'neg']))
+
+    def test_front_end(self):
+        '''Smoke test to just run the compile process'''
+        front = FrontEnd('data/source.c', 'data/glc')
+        front.compile()
 
 if __name__ == '__main__':
     unittest.main()
