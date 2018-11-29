@@ -16,6 +16,9 @@ dump:
 t3:
 	@python runner.py
 
+t3_phase:
+	@python runner.py t3_phase
+
 test:
 	@python -m unittest discover -b
 

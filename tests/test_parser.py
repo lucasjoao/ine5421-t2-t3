@@ -88,12 +88,12 @@ class ParserTests(unittest.TestCase):
     def test_parse(self):
         # example from slide
         parser = Parser('data/book_glc_03', True)
-        self.assertTrue(parser.parse(['id', 'v', 'id', 'til', 'id']))
-        self.assertFalse(parser.parse(['id', 'neg']))
+        self.assertTrue(parser.parse_by_phase(['id', 'v', 'id', 'til', 'id']))
+        self.assertFalse(parser.parse_by_phase(['id', 'neg']))
 
     def test_front_end(self):
         '''Smoke test to just run the compile process'''
-        front = FrontEnd('data/source.c', 'data/glc')
+        front = FrontEnd('data/good_source.c', 'data/glc')
         front.compile()
 
 if __name__ == '__main__':

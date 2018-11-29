@@ -12,6 +12,7 @@ Alunos:
 """
 
 import enum
+from .utils import Utils
 
 
 class TokenType(enum.Enum):
@@ -64,7 +65,7 @@ class Lexer(object):
         self._skip_space()
         lookahead = self._next_char()
         if not lookahead:
-            return Token(TokenType.EOF)
+            return Token(TokenType.EOF, Utils.END_MARK)
         if lookahead.isdigit():
             self._retract()
             return self._next_num_or_real()

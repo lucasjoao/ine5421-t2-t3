@@ -14,6 +14,7 @@ Alunos:
 import copy
 from .grammar import Grammar
 from .utils import Utils
+from .lexer import TokenType
 
 
 class Parser:
@@ -27,6 +28,7 @@ class Parser:
         # parsing table where the key is a tuple of (NT, T) and the value is
         # the value in table
         self._make_parsing_table()
+        self.stack = [Utils.END_MARK, self.glc._initial_symbol]
 
     def _make_dict_first_sets(self):
         self.first_sets = {key: set() for key in self.glc._nonterminals}
@@ -131,7 +133,7 @@ class Parser:
     def _add_in_parsing_table(self, production, symbol):
         self.parsing_table[production[0], symbol] = production[1:]
 
-    def parse(self, user_input):
+    def parse_by_phase(self, user_input):
         user_input += Utils.END_MARK
 
         stack = [Utils.END_MARK, self.glc._initial_symbol]
@@ -165,3 +167,41 @@ class Parser:
                 if Utils.EPSILON not in value:
                     for symbol in value[::-1]:
                         stack.append(symbol)
+
+    def parse_by_token(self, token):
+        print(self.stack)
+
+        stack_top = self.stack[len(self.stack) - 1]
+
+        char_input = token.type.value
+        if token.type == TokenType.EOF:
+            char_input = token.lexeme
+
+        char = token.lexeme
+        print('Stack top: ' + stack_top)
+        print('Char input: ' + char_input)
+        print('Char: ' + char)
+        print('\n')
+
+        self.stack.pop()
+
+        if stack_top == char_input:
+            if stack_top == Utils.END_MARK:
+                return 2
+
+            return 1
+        else:
+            key = (stack_top, char_input)
+
+            try:
+                value = self.parsing_table[key]
+            except KeyError:
+                print('O par ' + str(key) + ' gera erro na parsing table.')
+                return 0
+
+            if Utils.EPSILON not in value:
+                for symbol in value[::-1]:
+                    self.stack.append(symbol)
+
+            return 0
+
