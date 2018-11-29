@@ -93,7 +93,7 @@ class ParserTests(unittest.TestCase):
 
     def test_front_end(self):
         '''Smoke test to just run the compile process'''
-        front = FrontEnd('data/good_source.c', 'data/glc')
+        front = FrontEnd('data/source.c', 'data/glc')
         front.compile()
 
 if __name__ == '__main__':

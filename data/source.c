@@ -11,7 +11,7 @@
         do
             j = j-1;
         while (a[j] > v);
-        if (i >= j)
+        if (i >= j) then
             break;
         x = a[i];
         a[i] = a[j];

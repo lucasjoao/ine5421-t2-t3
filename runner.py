@@ -78,8 +78,8 @@ elif option == 'dump':
     print(glc._terminals)
     print('Fim da verificação da GLC em memória')
 elif option == 't3_phase':
-    front = front_end.FrontEnd('data/good_source.c', 'data/glc')
+    front = front_end.FrontEnd('data/source.c', 'data/glc')
     front.compile_by_phase()
 else:
-    front = front_end.FrontEnd('data/good_source.c', 'data/glc')
+    front = front_end.FrontEnd('data/source.c', 'data/glc')
     front.compile()
