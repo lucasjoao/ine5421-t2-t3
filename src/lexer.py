@@ -41,7 +41,7 @@ class TokenType(enum.Enum):
     ID = 'id'
     NUM = 'num'
     REAL = 'real'
-    RELOP = 'rel'
+    RELOP = 'relop'
     BASIC = 'basic'
 
 
