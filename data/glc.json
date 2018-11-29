@@ -96,6 +96,15 @@
             "bool",
             ")",
             "then",
+            "stmt"
+        ],
+        [
+            "matched_if",
+            "if",
+            "(",
+            "bool",
+            ")",
+            "then",
             "stmt",
             "else",
             "stmt"
@@ -155,12 +164,12 @@
         ],
         [
             "equality",
-            "==",
+            "relop",
             "equality"
         ],
         [
             "equality",
-            "!=",
+            "relop",
             "equality"
         ],
         [
@@ -170,22 +179,22 @@
         ],
         [
             "relx",
-            "<",
+            "relop",
             "expr"
         ],
         [
             "relx",
-            "<=",
+            "relop",
             "expr"
         ],
         [
             "relx",
-            ">=",
+            "relop",
             "expr"
         ],
         [
             "relx",
-            ">",
+            "relop",
             "expr"
         ],
         [
