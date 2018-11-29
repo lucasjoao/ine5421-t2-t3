@@ -38,9 +38,32 @@ class FrontEnd:
             if token.type == TokenType.EOF:
                 break
 
-        # syntax analysis
-        if self.parser.parse(lexemes):
-            print('Análise sintática realizada com sucesso :D')
-        else:
-            print('Erro na análise sintática :(')
+        # prints to just know what is happening
 
+        print(80 * '-' + '\n')
+
+        print('First sets:')
+        for key, value in self.parser.first_sets.items():
+            print(key, value)
+        print(80 * '-' + '\n')
+
+        print('Follow sets:')
+        for key, value in self.parser.follow_sets.items():
+            print(key, value)
+        print(80 * '-' + '\n')
+
+        print('Parsing table:')
+        for key, value in self.parser.parsing_table.items():
+            print(key, value)
+        print(80 * '-' + '\n')
+
+        # syntax analysis
+        print('Sequência da stack durante a execução:')
+        if self.parser.parse(lexemes):
+            print(80 * '-' + '\n')
+            print('Análise sintática realizada com sucesso :D')
+            print(80 * '-' + '\n')
+        else:
+            print(80 * '-' + '\n')
+            print('Erro na análise sintática :(')
+            print(80 * '-' + '\n')
