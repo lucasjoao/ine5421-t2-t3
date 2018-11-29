@@ -5,6 +5,7 @@
 
 all:
 	@python runner.py
+	@python -m unittest discover -b
 
 t2:
 	@python runner.py t2
