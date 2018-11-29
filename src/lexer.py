@@ -29,19 +29,19 @@ class TokenType(enum.Enum):
     RIGHT_SQUARE = ']'
 
     EOF = 256
-    IF = 257
-    THEN = 258
-    ELSE = 259
-    WHILE = 260
-    DO = 261
-    BREAK = 262
-    TRUE = 263
-    FALSE = 264
-    ID = 265
-    NUM = 266
-    REAL = 267
-    RELOP = 268
-    BASIC = 269
+    IF = 'if'
+    THEN = 'then'
+    ELSE = 'else'
+    WHILE = 'while'
+    DO = 'do'
+    BREAK = 'break'
+    TRUE = 'true'
+    FALSE = 'false'
+    ID = 'id'
+    NUM = 'num'
+    REAL = 'real'
+    RELOP = 'rel'
+    BASIC = 'basic'
 
 
 class Token(object):

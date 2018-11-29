@@ -23,7 +23,7 @@ class FrontEnd:
 
     def compile(self):
         # lexical analysis
-        lexemes = []
+        tokens = []
         while True:
             token = self.lexer.next_token()
 
@@ -33,7 +33,7 @@ class FrontEnd:
                     break
                 token = self.lexer.next_token()
 
-            lexemes.append(token.lexeme)
+            tokens.append(token.type.value)
 
             if token.type == TokenType.EOF:
                 break
@@ -58,8 +58,8 @@ class FrontEnd:
         print(80 * '-' + '\n')
 
         # syntax analysis
-        print('Sequência da stack durante a execução:')
-        if self.parser.parse(lexemes):
+        print('Sequência da execução:')
+        if self.parser.parse(tokens):
             print(80 * '-' + '\n')
             print('Análise sintática realizada com sucesso :D')
             print(80 * '-' + '\n')

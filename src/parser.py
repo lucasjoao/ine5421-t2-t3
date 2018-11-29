@@ -142,6 +142,9 @@ class Parser:
 
             stack_top = stack[len(stack) - 1]
             char_input = user_input[buffer_index]
+            print('Stack top: ' + stack_top)
+            print('Char input: ' + char_input)
+            print('\n')
 
             stack.pop()
 
